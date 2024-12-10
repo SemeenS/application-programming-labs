@@ -29,7 +29,7 @@ def display_histogram(histograms: tuple) -> None:
 
 def reflection(img: np.ndarray, axis: int) -> np.ndarray:
     """
-    Reflect the input image along the specified axis.
+    Reflect the input image along the specified axis for reflection: 0 for horizontal, 1 for vertical
     :return: np.ndarray: The reflected image.
     """
     return cv.flip(img, axis)
