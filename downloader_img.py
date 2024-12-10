@@ -1,6 +1,6 @@
 import os
-from icrawler.builtin import BingImageCrawler
 
+from icrawler.builtin import BingImageCrawler
 
 def download_images(keyword: str, num_images:int, img_dir:str):
     """
@@ -14,6 +14,7 @@ def download_images(keyword: str, num_images:int, img_dir:str):
         os.mkdir(img_dir)
     for filename in os.listdir(img_dir):
         os.remove(os.path.join(img_dir, filename))
+
     bing_crawler = BingImageCrawler(feeder_threads=1,
                                     parser_threads=2,
                                     downloader_threads=4,

@@ -1,28 +1,19 @@
-import argparse
-import cv2 as cv
+from parser import create_parser
+from downloader_img import download_images
+from iterator import Iterator
+from create_annotation import create_annotation
 
-from histogram import compute_histogram, reflection, display_histogram
-from parser import parsers
+def main():
+   args = create_parser()
+   try:
 
-def main() -> None:
-    path_to_img, path_to_save, reflection_axis = parsers()
+      #download_images(args.keyword, args.number, args.img_dir)
+      create_annotation(args.img_dir, args.annotation_file)
+      iterator = Iterator(args.annotation_file)
+      for i in iterator:
+         print(i)
+   except Exception as e:
+      print(e)
 
-    try:
-        img = cv.imread(path_to_img)
-        print(f"{path_to_img} sizes: {img.shape}")
-        display_histogram(compute_histogram(img))
-
-        ref_img = reflection(img, int(reflection_axis))
-        cv.imshow("Original image", img)
-        cv.waitKey(0)
-        cv.imshow("Reflected image", ref_img)
-        cv.waitKey(0)
-
-        cv.imwrite(path_to_save, ref_img)
-
-    except Exception as e:
-        print(f"Error: {e}")
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+   main()

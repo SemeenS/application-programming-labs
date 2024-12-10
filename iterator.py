@@ -14,15 +14,15 @@ class Iterator:
 
     def __next__(self):
         if self.count < self.limit:
-            next_elm = self.csv_path[self.count]
+            next_elm = self.list[self.count]
             self.count +=1
-            return 1
+            return next_elm
         else:
             raise StopIteration
 
     def __load_csv(self) -> list:
         with open(self.csv_path, mode='r', encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
-            next(reader)  # skip the header
+            next(reader)
             path_list = list(row[1] for row in reader)
             return path_list
